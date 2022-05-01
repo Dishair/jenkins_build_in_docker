@@ -1,6 +1,6 @@
 FROM ubuntu:20.04
 
-# Install pacakges
+# update packages
 RUN apt-get update
 
 # Install docker  git maven
