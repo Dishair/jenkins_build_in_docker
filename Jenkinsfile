@@ -1,5 +1,11 @@
 pipeline {
-    agent any
+    agent {
+
+        docker {
+            image 'devcvs-srv01:5000/shop2-backend/jenkins-agent'
+        }
+    }
+
     tools {
         maven "m3"
     }
