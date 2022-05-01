@@ -15,7 +15,7 @@ pipeline {
         }
 
 
-        stage ('build') {
+        stage ('build app') {
             steps {
                 sh 'mvn package'
                 
@@ -23,7 +23,7 @@ pipeline {
         }
 
 
-        stage('Make docker image') {
+        stage('Make docker image with app') {
             steps {
                 sh 'cd /root/'
                 git 'https://github.com/Dishair/jenkins_build_in_docker.git'
