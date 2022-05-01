@@ -10,7 +10,7 @@ pipeline {
     stages {
         stage ('git') {
             steps {
-                git 'https://github.com/Dishair/boxfuse-origin.git'    
+                git 'https://github.com/Dishair/boxfuse-origin.git'
             }  
         }
 
