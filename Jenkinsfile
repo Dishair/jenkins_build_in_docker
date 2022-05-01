@@ -20,16 +20,30 @@ pipeline {
 
         stage ('build') {
             steps {
-                sh 'mvn package'    
+                sh 'mvn package'
+                
             } 
         }
 
 
-        stage ('deploy') {
+        stage('Make docker image') {
             steps {
-                deploy adapters: [tomcat9(credentialsId: '17d1030d-ccb2-472e-9a9d-0b98edccc00f', path: '', url: 'http://192.168.56.21:8080')], contextPath: 'mywebapp3', war: '**/*.war'    
-            } 
+                sh 'cp -R gateway-api/build/libs/* docker-setup/shop/gateway-api && cd docker-setup/shop/gateway-api && docker build --tag=gateway-api .'
+                sh '''docker tag gateway-api devcvs-srv01:5000/shop2-backend/gateway-api:2-staging && docker push devcvs-srv01:5000/shop2-backend/gateway-api:2-staging'''
+
+            }
         }
+
+        stage('Run docker on devbe-srv01') {
+            steps {
+                sh 'ssh-keyscan -H devbe-srv01 >> ~/.ssh/known_hosts'
+                sh '''ssh jenkins@devbe-srv01 << EOF
+                sudo docker pull devcvs-srv01:5000/shop2-backend/gateway-api:2-staging
+                cd /etc/shop/docker
+                sudo docker-compose up -d
+                EOF'''
+            }
+        }      
 
     }
 }
