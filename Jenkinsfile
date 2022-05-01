@@ -2,7 +2,7 @@ pipeline {
     agent {
 
         docker {
-            image 'docker.teq.kz:8888/jenkins_build_node'
+            image 'docker-build'
         }
     }
 
