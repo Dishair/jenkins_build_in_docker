@@ -29,7 +29,7 @@ pipeline {
                 sh 'cd /root/'
                 git 'https://github.com/Dishair/jenkins_build_in_docker.git'
                 sh 'cd /root/jenkins_build_in_docker/run'
-                sh 'docker build -t maven-run .'
+                sh 'docker build -t tomcat-run .'
 
             }
         }
@@ -37,7 +37,7 @@ pipeline {
 
         stage('Run docker container on server') {
             steps {
-                sh 'docker run maven-run'
+                sh 'docker run tomcat-run'
             }
         }      
 
