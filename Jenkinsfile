@@ -20,7 +20,10 @@ pipeline {
                 sh "mvn package"
                 sh "NEWFILE='FROM tomcat:alpine as prod\nCOPY /var/lib/jenkins/workspace/jenkins_build_in_docker/target /usr/local/tomcat/webapps\nEXPOSE 8080\nCMD ['catalina.sh', 'run']\n'"
                 sh 'echo -e $NEWFILE >> Dockerfile'
-                sh "su - root -c '/usr/bin/dockerd &'"
+                sh 'sudo groupadd docker'
+                sh 'sudo gpasswd -a $USER docker'
+                sh "/usr/bin/dockerd &"
+                sh '/usr/bin/docker run hello-world'
                 sh "/usr/bin/docker build -t tomcat-run ."
             }
         }
