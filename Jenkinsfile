@@ -22,7 +22,7 @@ pipeline {
                 sh "echo 'FROM tomcat:alpine as prod' >> Dockerfile"
                 sh "echo 'COPY /var/lib/jenkins/workspace/jenkins_build_in_docker/target /usr/local/tomcat/webapps' >> Dockerfile"
                 sh "echo 'EXPOSE 8080' >> Dockerfile"
-                sh "echo 'CMD ["catalina.sh", "run"]' >> Dockerfile"
+                sh 'echo 'CMD ["catalina.sh", "run"]' >> Dockerfile'
                 sh "docker build -t tomcat-run ."
             }
         }
