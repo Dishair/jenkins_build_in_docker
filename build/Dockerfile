@@ -6,7 +6,9 @@ ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update
 
 # Install docker  git maven
-RUN apt-get -y install docker.io git maven
+RUN apt-get -y install curl git maven && curl -sSL https://get.docker.com/ | sh
+
+
 
 # Create volume with app
 # RUN mkdir -p /var/lib/jenkins/workspace/jenkins_build_in_docker/target
