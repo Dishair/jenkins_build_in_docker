@@ -25,10 +25,12 @@ pipeline {
 
         stage('Make docker image with app') {
             steps {
-                git 'https://github.com/Dishair/jenkins_build_in_docker.git'
-                // sh 'cd /jenkins_build_in_docker/run'
+                touch Dockerfile
+                echo "FROM tomcat:alpine as prod" >> Dockerfile
+                echo "COPY --from=docker-build /boxfuse-origin/target /usr/local/tomcat/webapps" >> Dockerfile
+                echo "EXPOSE 8080" >> Dockerfile
+                CMD "["catalina.sh", "run"]" >> Dockerfile
                 sh 'docker build -t tomcat-run .'
-
             }
         }
 
