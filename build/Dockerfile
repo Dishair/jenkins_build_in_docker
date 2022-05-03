@@ -8,4 +8,6 @@ RUN apt-get update
 # Install docker  git maven
 RUN apt-get -y install docker.io git maven
 
-VOLUME /var/lib/jenkins/workspace/jenkins_build_in_docker/target
+# Create volume with app
+# RUN mkdir -p /var/lib/jenkins/workspace/jenkins_build_in_docker/target
+# VOLUME /var/lib/jenkins/workspace/jenkins_build_in_docker/target
