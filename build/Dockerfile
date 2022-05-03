@@ -8,4 +8,4 @@ RUN apt-get update
 # Install docker  git maven
 RUN apt-get -y install docker.io git maven
 
-VOLUME /war-folder /boxfuse-origin/target
+VOLUME /war-folder /var/lib/jenkins/workspace/jenkins_build_in_docker/target/

@@ -27,7 +27,7 @@ pipeline {
             steps {
                 touch Dockerfile
                 echo 'FROM tomcat:alpine as prod' >> Dockerfile
-                echo 'VOLUME /boxfuse-origin/target /usr/local/tomcat/webapps' >> Dockerfile
+                echo 'VOLUME /var/lib/jenkins/workspace/jenkins_build_in_docker/target/ /usr/local/tomcat/webapps' >> Dockerfile
                 echo 'EXPOSE 8080' >> Dockerfile
                 echo 'CMD ["catalina.sh", "run"]' >> Dockerfile
                 sh 'docker build -t tomcat-run .'
