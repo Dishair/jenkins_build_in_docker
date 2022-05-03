@@ -9,13 +9,14 @@ RUN apt-get update
 
 
 # Install git maven docker
-RUN apt-get -y install git maven docker.io sudo
+RUN apt-get -y install git maven docker.io curl
 
-RUN groupadd docker
-RUN usermod -aG docker $USER
-RUN newgrp docker 
-RUN useradd -u 8877 user
-USER user
+# RUN curl -fsSL https://get.docker.com/rootless
+# RUN DOCKERD_ROOTLESS_ROOTLESSKIT_FLAGS="-p 0.0.0.0:2376:2376/tcp" \
+#  dockerd-rootless.sh \
+#  -H tcp://0.0.0.0:2376 \
+#  --tlsverify --tlscacert=ca.pem --tlscert=cert.pem --tlskey=key.pem
+
 
 # CMD ["/usr/bin/dockerd",">","/dev/null","2>&1","&"]
 
