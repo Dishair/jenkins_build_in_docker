@@ -9,10 +9,13 @@ RUN apt-get update
 
 
 # Install git maven docker
-RUN apt-get -y install git maven docker.io screen
+RUN apt-get -y install git maven docker.io sudo
 
-# RUN echo -e "root ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
-
+RUN groupadd docker
+RUN usermod -aG docker $USER
+RUN newgrp docker 
+RUN useradd -u 8877 user
+USER user
 
 # CMD ["/usr/bin/dockerd",">","/dev/null","2>&1","&"]
 
