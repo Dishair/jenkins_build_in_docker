@@ -18,12 +18,7 @@ pipeline {
         stage ('build app & Make docker image with app') {
             steps {              
                 sh "mvn package"
-                sh "tee Dockerfile <<EOF
-                FROM tomcat:alpine as prod
-                COPY /var/lib/jenkins/workspace/jenkins_build_in_docker/target /usr/local/tomcat/webapps
-                EXPOSE 8080
-                CMD ['catalina.sh', 'run']
-                EOF"
+                sh "echo -e "FROM tomcat:alpine as prod\nCOPY /var/lib/jenkins/workspace/jenkins_build_in_docker/target /usr/local/tomcat/webapps\nEXPOSE 8080\nCMD ['catalina.sh', 'run']\n" >> Dockerfile"
                 sh "docker build -t tomcat-run ."
             }
         }
