@@ -9,7 +9,7 @@ RUN apt-get update
 
 
 # Install git maven docker
-RUN apt-get -y install git maven docker.io
+RUN apt-get -y install git maven docker.io iptables
 
 
 
