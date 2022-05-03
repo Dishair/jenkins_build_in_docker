@@ -10,6 +10,7 @@ pipeline {
     stages {
         stage ('git') {
             steps {
+                sh 'cd /root/'
                 git 'https://github.com/Dishair/boxfuse-origin.git'
             }  
         }
@@ -36,12 +37,7 @@ pipeline {
 
         stage('Run docker container on server') {
             steps {
-                sh 'ssh-keyscan -H devbe-srv01 >> ~/.ssh/known_hosts'
-                sh '''ssh jenkins@devbe-srv01 << EOF
-                sudo docker pull devcvs-srv01:5000/shop2-backend/gateway-api:2-staging
-                cd /etc/shop/docker
-                sudo docker-compose up -d
-                EOF'''
+                sh 'docker run maven-run'
             }
         }      
 

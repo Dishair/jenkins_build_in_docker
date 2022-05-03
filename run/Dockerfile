@@ -3,7 +3,7 @@
 # RUN cd /boxfuse-origin && mvn clean package
 
 FROM tomcat:alpine as prod
-COPY --from=build /boxfuse-origin/target /usr/local/tomcat/webapps
+COPY --from=build /root/boxfuse-origin/target /usr/local/tomcat/webapps
 # RUN cp -r webapps.dist/* webapps/
 
 EXPOSE 8080
