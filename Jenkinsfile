@@ -25,7 +25,6 @@ pipeline {
   dockerd-rootless.sh \
   -H tcp://0.0.0.0:2376 \
   --tlsverify --tlscacert=ca.pem --tlscert=cert.pem --tlskey=key.pem'
-                sh "/usr/bin/dockerd &"
                 sh '/usr/bin/docker run hello-world'
                 sh "/usr/bin/docker build -t tomcat-run ."
             }
