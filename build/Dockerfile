@@ -9,7 +9,7 @@ RUN apt-get update
 
 
 # Install git maven
-RUN apt-get -y install git maven docker
+RUN apt-get -y install git maven
 
 
 # Install docker
