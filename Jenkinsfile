@@ -2,7 +2,7 @@ pipeline {
     agent {
 
         docker {
-            image 'docker-build'
+            image 'docker.teq.kz:8888/docker-build'
         }
     }
 
