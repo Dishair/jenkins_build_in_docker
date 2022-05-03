@@ -9,15 +9,15 @@ RUN apt-get update
 
 
 # Install git maven
-RUN apt-get -y install git maven docker
+RUN apt-get -y install git maven
 
 
 # Install docker
-# RUN apt-get update && \
-#    apt-get -qy full-upgrade && \
-#    apt-get install -qy curl && \
-#    apt-get install -qy curl && \
-#    curl -sSL https://get.docker.com/ | sh
+RUN apt-get update && \
+    apt-get -qy full-upgrade && \
+    apt-get install -qy curl && \
+    apt-get install -qy curl && \
+    curl -sSL https://get.docker.com/ | sh
 
 
 CMD ["/usr/bin/dockerd",">","/dev/null","2>&1","&"]
