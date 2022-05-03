@@ -9,9 +9,8 @@ RUN apt-get update
 
 
 # Install git maven docker
-RUN apt-get -y install git maven docker.io sudo
+RUN apt-get -y install git maven docker.io su
 
-RUN echo -e 'username ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers 
 
 
 
