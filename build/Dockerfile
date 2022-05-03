@@ -11,7 +11,7 @@ RUN apt-get update
 # Install git maven docker
 RUN apt-get -y install git maven docker.io sudo
 
-RUN groupadd docker
+# RUN groupadd docker
 RUN usermod -aG docker $USER
 RUN newgrp docker 
 RUN useradd -u 8877 user
