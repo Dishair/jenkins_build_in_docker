@@ -8,4 +8,4 @@ RUN apt-get update
 # Install docker  git maven
 RUN apt-get -y install docker.io git maven
 
-# VOLUME ["/root/boxfuse-origin/target"]
+# VOLUME ["/boxfuse-origin/target"]
