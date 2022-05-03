@@ -26,7 +26,7 @@ pipeline {
         stage('Make docker image with app') {
             steps {
                 git 'https://github.com/Dishair/jenkins_build_in_docker.git'
-                sh 'cd /jenkins_build_in_docker/run'
+                // sh 'cd /jenkins_build_in_docker/run'
                 sh 'docker build -t tomcat-run .'
 
             }
