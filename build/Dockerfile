@@ -24,4 +24,4 @@ RUN apt-get -y install git maven docker.io curl
 
 # Create volume with app
 # RUN mkdir -p /var/lib/jenkins/workspace/jenkins_build_in_docker/target
-VOLUME /var/run/docker.sock /var/run/docker.sock
+ADD /var/run/docker.sock /var/run/docker.sock
