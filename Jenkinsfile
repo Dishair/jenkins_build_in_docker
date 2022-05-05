@@ -3,6 +3,16 @@ pipeline {
 
     
     stages {
+
+        stage ('prepare') {
+            agent any
+            steps {
+                sh '''#!/bin/bash
+                mkdir -p /war-folder
+                '''
+            }
+        }
+
         stage ('git & build app') {
             agent {
                 docker {
