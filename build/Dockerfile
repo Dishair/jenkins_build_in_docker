@@ -8,5 +8,8 @@ RUN apt-get update
 
 
 
-# Install git maven docker
-RUN apt-get -y install git maven docker.io curl
+# Install git maven 
+RUN apt-get -y install git maven curl
+
+# Install git docker
+RUN curl -fsSL https://get.docker.com | sh
