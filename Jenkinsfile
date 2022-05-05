@@ -1,25 +1,29 @@
 pipeline {
-    agent {
-
-        docker {
-            image 'docker.teq.kz:8888/docker-build:latest'
-            args '-v /var/run/docker.sock:/var/run/docker.sock -v /war-folder:/boxfuse-origin/target/target'
-        }
-    }
+    agent none
 
     
     stages {
-        stage ('git') {
+        stage ('git & build app') {
+            agent {
+                docker {
+                    image 'docker.teq.kz:8888/docker-build:latest'
+                    args '-v /war-folder:/var/lib/jenkins/workspace/jenkins_build_in_docker/target'
+                }       
+            }
             steps {
                 git 'https://github.com/Dishair/boxfuse-origin.git'
+                sh "mvn package"
             }  
         }
 
 
-        stage ('build app & Make docker image with app') {
+
+        stage ('Make docker image with app') {
+            agent {
+                any
+            }
             steps {            
-                sh "mvn package"
-                sh "NEWFILE='FROM tomcat:alpine as prod\nVOLUME /boxfuse-origin/target/target /usr/local/tomcat/webapps\nEXPOSE 8080\nCMD ['catalina.sh', 'run']\n'"
+                sh "NEWFILE='FROM tomcat:alpine as prod\nCOPY /war-folder /usr/local/tomcat/webapps\nEXPOSE 8080\nCMD ['catalina.sh', 'run']\n'"
                 sh 'echo $NEWFILE > /Dockerfile'
                 // sh '/usr/bin/docker run hello-world'
                 sh "docker build -t tomcat-run /."
