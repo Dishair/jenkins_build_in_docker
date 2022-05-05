@@ -19,14 +19,19 @@ pipeline {
 
 
         stage ('Make docker image with app') {
-            agent {
-                any
-            }
-            steps {            
-                sh "NEWFILE='FROM tomcat:alpine as prod\nCOPY /war-folder /usr/local/tomcat/webapps\nEXPOSE 8080\nCMD ['catalina.sh', 'run']\n'"
-                sh 'echo $NEWFILE > /Dockerfile'
-                // sh '/usr/bin/docker run hello-world'
-                sh "docker build -t tomcat-run /."
+            agent any
+            steps {
+                sh '''#!/bin/bash
+                mkdir -p /build-folder
+                cd /build-folder
+                mv /war-folder/*.war /build-folder/
+                rm -f Dockerfile
+                echo 'FROM tomcat:alpine as prod\n' >> /build-folder/Dockerfile
+                echo 'COPY hello-1.0.war /usr/local/tomcat/webapps\n' >> /build-folder/Dockerfile
+                echo 'EXPOSE 8080\n' >> /build-folder/Dockerfile
+                echo 'CMD ['catalina.sh', 'run']\n' >> /build-folder/Dockerfile
+                '''
+                sh ' docker build -t tomcat-run /build-folder/.'
             }
         }
 
