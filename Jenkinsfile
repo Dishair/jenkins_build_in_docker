@@ -4,15 +4,6 @@ pipeline {
     
     stages {
 
-        stage ('prepare') {
-            agent any
-            steps {
-                sh '''#!/bin/bash
-                mkdir -p /war-folder
-                '''
-            }
-        }
-
         stage ('git & build app') {
             agent {
                 docker {
@@ -34,7 +25,7 @@ pipeline {
                 sh '''#!/bin/bash
                 mkdir -p /build-folder
                 cd /build-folder
-                mv /war-folder/*.war /build-folder/
+                mv /var/lib/jenkins/workspace/build-in-docker/target/*.war /build-folder/
                 rm -f Dockerfile
                 echo 'FROM tomcat:alpine as prod\n' >> /build-folder/Dockerfile
                 echo 'COPY hello-1.0.war /usr/local/tomcat/webapps\n' >> /build-folder/Dockerfile
