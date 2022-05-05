@@ -9,4 +9,4 @@ RUN apt-get update
 
 
 # Install git maven 
-RUN apt-get -y install git maven curls
+RUN apt-get -y install git maven curl
