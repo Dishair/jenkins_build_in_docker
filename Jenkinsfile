@@ -40,9 +40,21 @@ pipeline {
         stage('Run docker container on server') {
             agent any
             steps {
-                sh 'docker run tomcat-run'
+                sh '''#!/bin/bash
+                cd /build-folder
+                rm -f docker-compose.yml
+                echo 'version: "3.9"\n' >> /build-folder/docker-compose.yml
+                echo 'services:\n' >> /build-folder/docker-compose.yml
+                echo '  tomcat-service:\n' >> /build-folder/docker-compose.yml
+                echo '    build: .\n' >> /build-folder/docker-compose.yml
+                echo '    ports:\n' >> /build-folder/docker-compose.yml
+                echo '      - "7070:8080"\n' >> /build-folder/docker-compose.yml
+                echo '  tomcat:\n' >> /build-folder/docker-compose.yml
+                echo '    image: "tomcat-run:latest"' >> /build-folder/docker-compose.yml
+                '''
+                sh 'cd /build-folder && docker-compose up -d'
             }
-        }      
+        }
 
     }
 }
