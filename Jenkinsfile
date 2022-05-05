@@ -38,6 +38,7 @@ pipeline {
 
 
         stage('Run docker container on server') {
+            agent any
             steps {
                 sh 'docker run tomcat-run'
             }
