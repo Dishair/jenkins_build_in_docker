@@ -3,6 +3,7 @@ pipeline {
 
         docker {
             image 'docker.teq.kz:8888/docker-build:latest'
+            args '-v /var/run/docker.sock:/var/run/docker.sock'
         }
     }
 
