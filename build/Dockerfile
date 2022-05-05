@@ -11,7 +11,7 @@ RUN apt-get update
 # Install git maven docker
 RUN apt-get -y install git maven docker.io curl
 
-WORKDIR /
+# WORKDIR /
 
 # RUN curl -fsSL https://get.docker.com/rootless
 # RUN DOCKERD_ROOTLESS_ROOTLESSKIT_FLAGS="-p 0.0.0.0:2376:2376/tcp" \
@@ -24,4 +24,4 @@ WORKDIR /
 
 # Create volume with app
 # RUN mkdir -p /var/lib/jenkins/workspace/jenkins_build_in_docker/target
-# VOLUME /var/lib/jenkins/workspace/jenkins_build_in_docker/target
+VOLUME /var/run/docker.sock /var/run/docker.sock

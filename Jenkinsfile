@@ -20,11 +20,6 @@ pipeline {
                 sh "mvn package"
                 sh "NEWFILE='FROM tomcat:alpine as prod\nCOPY /var/lib/jenkins/workspace/jenkins_build_in_docker/target /usr/local/tomcat/webapps\nEXPOSE 8080\nCMD ['catalina.sh', 'run']\n'"
                 sh 'echo -e $NEWFILE >> Dockerfile'
-                sh 'curl -fsSL https://get.docker.com/rootless >> /dockerd-rootless.sh' 
-                sh 'DOCKERD_ROOTLESS_ROOTLESSKIT_FLAGS="-p 0.0.0.0:2376:2376/tcp" \
-  /dockerd-rootless.sh \
-  -H tcp://0.0.0.0:2376 \
-  --tlsverify --tlscacert=ca.pem --tlscert=cert.pem --tlskey=key.pem'
                 sh '/usr/bin/docker run hello-world'
                 sh "/usr/bin/docker build -t tomcat-run ."
             }
